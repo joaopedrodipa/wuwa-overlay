@@ -1,0 +1,319 @@
+[
+  {
+    "id": "denia",
+    "name": "Denia",
+    "element": "Fusion",
+    "rarity": 5
+  },
+  {
+    "id": "lucilla",
+    "name": "Lucilla",
+    "element": "Glacio",
+    "rarity": 5
+  },
+  {
+    "id": "hiyuki",
+    "name": "Hiyuki",
+    "element": "Glacio",
+    "rarity": 5
+  },
+  {
+    "id": "rebecca",
+    "name": "Rebecca",
+    "element": "Electro",
+    "rarity": 5
+  },
+  {
+    "id": "lucy",
+    "name": "Lucy",
+    "element": "Spectro",
+    "rarity": 5
+  },
+  {
+    "id": "luuk-herssen",
+    "name": "Luuk Herssen",
+    "element": "Spectro",
+    "rarity": 5
+  },
+  {
+    "id": "aemeath",
+    "name": "Aemeath",
+    "element": "Fusion",
+    "rarity": 5
+  },
+  {
+    "id": "sigrika",
+    "name": "Sigrika",
+    "element": "Aero",
+    "rarity": 5
+  },
+  {
+    "id": "cartethyia",
+    "name": "Cartethyia",
+    "element": "Aero",
+    "rarity": 5
+  },
+  {
+    "id": "iuno",
+    "name": "Iuno",
+    "element": "Aero",
+    "rarity": 5
+  },
+  {
+    "id": "galbrena",
+    "name": "Galbrena",
+    "element": "Fusion",
+    "rarity": 5
+  },
+  {
+    "id": "qiuyuan",
+    "name": "Qiuyuan",
+    "element": "Aero",
+    "rarity": 5
+  },
+  {
+    "id": "carlotta",
+    "name": "Carlotta",
+    "element": "Glacio",
+    "rarity": 5
+  },
+  {
+    "id": "lynae",
+    "name": "Lynae",
+    "element": "Spectro",
+    "rarity": 5
+  },
+  {
+    "id": "phrolova",
+    "name": "Phrolova",
+    "element": "Havoc",
+    "rarity": 5
+  },
+  {
+    "id": "augusta",
+    "name": "Augusta",
+    "element": "Electro",
+    "rarity": 5
+  },
+  {
+    "id": "ciaccona",
+    "name": "Ciaccona",
+    "element": "Aero",
+    "rarity": 5
+  },
+  {
+    "id": "lupa",
+    "name": "Lupa",
+    "element": "Fusion",
+    "rarity": 5
+  },
+  {
+    "id": "phoebe",
+    "name": "Phoebe",
+    "rarity": 5
+  },
+  {
+    "id": "mornye",
+    "name": "Mornye",
+    "element": "Fusion",
+    "rarity": 5
+  },
+  {
+    "id": "shorekeeper",
+    "name": "Shorekeeper",
+    "element": "Spectro",
+    "rarity": 5
+  },
+  {
+    "id": "zani",
+    "name": "Zani",
+    "element": "Spectro",
+    "rarity": 5
+  },
+  {
+    "id": "cantarella",
+    "name": "Cantarella",
+    "element": "Havoc",
+    "rarity": 5
+  },
+  {
+    "id": "chisa",
+    "name": "Chisa",
+    "element": "Havoc",
+    "rarity": 5
+  },
+  {
+    "id": "brant",
+    "name": "Brant",
+    "element": "Fusion",
+    "rarity": 5
+  },
+  {
+    "id": "jinhsi",
+    "name": "Jinhsi",
+    "element": "Spectro",
+    "rarity": 5
+  },
+  {
+    "id": "jiyan",
+    "name": "Jiyan",
+    "element": "Aero",
+    "rarity": 5
+  },
+  {
+    "id": "changli",
+    "name": "Changli",
+    "element": "Fusion",
+    "rarity": 5
+  },
+  {
+    "id": "zhezhi",
+    "name": "Zhezhi",
+    "element": "Glacio",
+    "rarity": 5
+  },
+  {
+    "id": "rover-spectro",
+    "name": "Rover (Spectro)",
+    "element": "Spectro",
+    "rarity": 5
+  },
+  {
+    "id": "sanhua",
+    "name": "Sanhua",
+    "element": "Glacio",
+    "rarity": 4
+  },
+  {
+    "id": "xiangli-yao",
+    "name": "Xiangli Yao",
+    "element": "Electro",
+    "rarity": 5
+  },
+  {
+    "id": "rover-havoc",
+    "name": "Rover (Havoc)",
+    "element": "Havoc",
+    "rarity": 5
+  },
+  {
+    "id": "verina",
+    "name": "Verina",
+    "element": "Spectro",
+    "rarity": 5
+  },
+  {
+    "id": "camellya",
+    "name": "Camellya",
+    "element": "Havoc",
+    "rarity": 5
+  },
+  {
+    "id": "roccia",
+    "name": "Roccia",
+    "element": "Havoc",
+    "rarity": 5
+  },
+  {
+    "id": "mortefi",
+    "name": "Mortefi",
+    "element": "Fusion",
+    "rarity": 4
+  },
+  {
+    "id": "rover-aero",
+    "name": "Rover (Aero)",
+    "element": "Aero",
+    "rarity": 5
+  },
+  {
+    "id": "lingyang",
+    "name": "Lingyang",
+    "element": "Glacio",
+    "rarity": 5
+  },
+  {
+    "id": "buling",
+    "name": "Buling",
+    "element": "Electro",
+    "rarity": 4
+  },
+  {
+    "id": "calcharo",
+    "name": "Calcharo",
+    "element": "Electro",
+    "rarity": 5
+  },
+  {
+    "id": "yinlin",
+    "name": "Yinlin",
+    "element": "Electro",
+    "rarity": 5
+  },
+  {
+    "id": "encore",
+    "name": "Encore",
+    "element": "Fusion",
+    "rarity": 5
+  },
+  {
+    "id": "aalto",
+    "name": "Aalto",
+    "element": "Aero",
+    "rarity": 4
+  },
+  {
+    "id": "baizhi",
+    "name": "Baizhi",
+    "element": "Glacio",
+    "rarity": 4
+  },
+  {
+    "id": "lumi",
+    "name": "Lumi",
+    "element": "Electro",
+    "rarity": 4
+  },
+  {
+    "id": "danjin",
+    "name": "Danjin",
+    "element": "Havoc",
+    "rarity": 4
+  },
+  {
+    "id": "taoqi",
+    "name": "Taoqi",
+    "element": "Havoc",
+    "rarity": 4
+  },
+  {
+    "id": "yangyang",
+    "name": "Yangyang",
+    "element": "Aero",
+    "rarity": 4
+  },
+  {
+    "id": "jianxin",
+    "name": "Jianxin",
+    "element": "Aero",
+    "rarity": 5
+  },
+  {
+    "id": "chixia",
+    "name": "Chixia",
+    "element": "Fusion",
+    "rarity": 4
+  },
+  {
+    "id": "youhu",
+    "name": "Youhu",
+    "element": "Glacio",
+    "rarity": 4
+  },
+  {
+    "id": "yuanwu",
+    "name": "Yuanwu",
+    "element": "Electro",
+    "rarity": 4
+  }
+]

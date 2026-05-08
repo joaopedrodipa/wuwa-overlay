@@ -1,0 +1,149 @@
+[
+  {
+    "id": "crownless",
+    "name": "Crownless",
+    "image": "Crownless",
+    "Resist1": "Havoc",
+    "Resist2": "none"
+  },
+  {
+    "id": "dragonofdirge",
+    "name": "Dragon of Dirge",
+    "image": "DragonofDirge",
+    "Resist1": "Fusion",
+    "Resist2": "none"
+  },
+  {
+    "id": "fallacyofnoreturn",
+    "name": "Fallacy of No Return",
+    "image": "FallacyofNoReturn",
+    "Resist1": "Spectro",
+    "Resist2": "none"
+  },
+  {
+    "id": "feilianberingal",
+    "name": "Feilian Beringal",
+    "image": "FeilianBeringal",
+    "Resist1": "Aero",
+    "Resist2": "none"
+  },
+  {
+    "id": "fleurdelys",
+    "name": "Fleurdelys",
+    "image": "Fleurdelys",
+    "Resist1": "Aero",
+    "Resist2": "none"
+  },
+  {
+    "id": "hecate",
+    "name": "Hecate",
+    "image": "Hecate",
+    "Resist1": "Havoc",
+    "Resist2": "none"
+  },
+  {
+    "id": "hyvatia",
+    "name": "Hyvatia",
+    "image": "Hyvatia",
+    "Resist1": "Spectro",
+    "Resist2": "none"
+  },
+  {
+    "id": "impermanenceheron",
+    "name": "Impermanence Heron",
+    "image": "ImpermanenceHeron",
+    "Resist1": "Havoc",
+    "Resist2": "none"
+  },
+  {
+    "id": "infernorider",
+    "name": "Inferno Rider",
+    "image": "InfernoRider",
+    "Resist1": "Fusion",
+    "Resist2": "none"
+  },
+  {
+    "id": "ladyofthesea",
+    "name": "Lady of the Sea",
+    "image": "LadyoftheSea",
+    "Resist1": "Aero",
+    "Resist2": "none"
+  },
+  {
+    "id": "lampylumenmyriad",
+    "name": "Lampylumen Myriad",
+    "image": "LampylumenMyriad",
+    "Resist1": "Glacio",
+    "Resist2": "none"
+  },
+  {
+    "id": "mechabomination",
+    "name": "Mech Abomination",
+    "image": "MechAbomination",
+    "Resist1": "Electro",
+    "Resist2": "none"
+  },
+  {
+    "id": "mourningaix",
+    "name": "Mourning Aix",
+    "image": "MourningAix",
+    "Resist1": "Spectro",
+    "Resist2": "none"
+  },
+  {
+    "id": "namelessexplorer",
+    "name": "Nameless Explorer",
+    "image": "NamelessExplorer",
+    "Resist1": "Aero",
+    "Resist2": "none"
+  },
+  {
+    "id": "reactorhusk",
+    "name": "Reactor Husk",
+    "image": "ReactorHusk",
+    "Resist1": "Fusion",
+    "Resist2": "none"
+  },
+  {
+    "id": "scar",
+    "name": "Scar",
+    "image": "Scar",
+    "Resist1": "Spectro",
+    "Resist2": "Havoc"
+  },
+  {
+    "id": "sentryconstruct",
+    "name": "Sentry Construct",
+    "image": "SentryConstruct",
+    "Resist1": "Glacio",
+    "Resist2": "none"
+  },
+  {
+    "id": "sigillum",
+    "name": "Sigillum",
+    "image": "Sigillum",
+    "Resist1": "Spectro",
+    "Resist2": "none"
+  },
+  {
+    "id": "tempestmephis",
+    "name": "Tempest Mephis",
+    "image": "TempestMephis",
+    "Resist1": "Electro",
+    "Resist2": "none"
+  },
+  {
+    "id": "thefalsesovereign",
+    "name": "The False Sovereign",
+    "image": "TheFalseSovereign",
+    "Resist1": "Electro",
+    "Resist2": "Havoc"
+  },
+  {
+    "id": "thunderingmephis",
+    "name": "Thundering Mephis",
+    "image": "ThunderingMephis",
+    "Resist1": "Electro",
+    "Resist2": "none"
+  }
+]

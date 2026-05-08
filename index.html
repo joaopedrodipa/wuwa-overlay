@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wuthering Waves Draft Overlay</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="overlay-container" id="mainScreen">
+        <!-- Custom Title Bar for Dragging -->
+        <div class="title-bar" id="titleBar">
+            <div class="title">Wuthering Waves Draft Overlay</div>
+            <div class="window-controls">
+                <button class="control-btn minimize" onclick="minimizeWindow()">─</button>
+                <button class="control-btn maximize" onclick="maximizeWindow()">▢</button>
+                <button class="control-btn close" onclick="closeWindow()">✕</button>
+            </div>
+        </div>
+
+        <!-- Characters Container -->
+        <div class="characters-container" id="charactersContainer">
+            <!-- Rows will be rendered here by JavaScript -->
+        </div>
+
+    </div>
+
+    <div class="draft-screen" id="draftScreen" style="display:none">
+        <div class="draft-header">
+            <div class="draft-header-left">
+                <button class="draft-back-btn" onclick="exitDraft()">← Back</button>
+                <span class="draft-title">DRAFT</span>
+                <span class="draft-status" id="draftStatus"></span>
+            </div>
+            <div class="window-controls">
+                <button class="control-btn minimize" onclick="minimizeWindow()">─</button>
+                <button class="control-btn maximize" onclick="maximizeWindow()">▢</button>
+                <button class="control-btn close" onclick="closeWindow()">✕</button>
+            </div>
+        </div>
+        <div class="tower-bar" id="towerBar"></div>
+        <div class="draft-body">
+            <div class="draft-pool" id="draftPool"></div>
+            <div class="draft-cascade" id="draftCascade"></div>
+        </div>
+    </div>
+
+    <div id="towerScreen" style="display:none"></div>
+    <div id="myTimesScreen" style="display:none"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+{
+  "name": "wuthering-waves-overlay",
+  "version": "1.0.0",
+  "description": "Wuthering Waves Draft Overlay - Desktop Application using Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder --win",
+    "publish": "electron-builder --win --publish always"
+  },
+  "keywords": ["electron", "overlay", "wuthering-waves"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^42.0.0",
+    "electron-builder": "latest"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.3"
+  },
+  "build": {
+    "appId": "com.wutheringwaves.overlay",
+    "productName": "Wuthering Waves Draft Overlay",
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "script.js",
+      "styles.css",
+      "resonators.json",
+      "bosses.json",
+      "Icons/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "joaopedrodipa",
+      "repo": "wuwa-overlay"
+    },
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        { "target": "nsis", "arch": ["x64"] }
+      ]
+    },
+    "asar": false,
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Wuthering Waves Overlay",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico"
+    }
+  }
+}
