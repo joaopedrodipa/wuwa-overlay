@@ -42,12 +42,12 @@
       "owner": "joaopedrodipa",
       "repo": "wuwa-overlay"
     },
+    "forceCodeSigning": false,
     "win": {
       "icon": "assets/icon.ico",
       "target": [
         { "target": "nsis", "arch": ["x64"] }
-      ],
-      "sign": false
+      ]
     },
     "linux": {
       "icon": "assets/icon.png",
