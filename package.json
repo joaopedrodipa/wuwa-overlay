@@ -40,7 +40,8 @@
     "publish": {
       "provider": "github",
       "owner": "joaopedrodipa",
-      "repo": "wuwa-overlay"
+      "repo": "wuwa-overlay",
+      "releaseType": "release"
     },
     "forceCodeSigning": false,
     "win": {
