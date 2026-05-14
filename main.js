@@ -10,8 +10,8 @@ autoUpdater.autoInstallOnAppQuit = true;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 820,
-    height: 860,
+    width: 1680,
+    height: 850,
     minWidth: 560,
     minHeight: 600,
     x: 50,
@@ -25,7 +25,6 @@ function createWindow() {
       sandbox: true
     },
     frame: false,
-    alwaysOnTop: true,
     backgroundColor: '#000000'
   });
 
@@ -36,8 +35,6 @@ function createWindow() {
   }
 
   mainWindow.on('closed', () => { mainWindow = null; });
-  mainWindow.on('blur',  () => { if (mainWindow) mainWindow.setAlwaysOnTop(false); });
-  mainWindow.on('focus', () => { if (mainWindow) mainWindow.setAlwaysOnTop(true); });
 }
 
 app.on('ready', () => {

@@ -1,13 +1,14 @@
 {
   "name": "wuthering-waves-overlay",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Wuthering Waves Draft Overlay - Desktop Application using Electron",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "dev": "electron . --dev",
     "build": "electron-builder --win",
-    "publish": "electron-builder --win --publish always"
+    "build:linux": "electron-builder --linux",
+    "publish": "electron-builder --win --linux --publish always"
   },
   "keywords": ["electron", "overlay", "wuthering-waves"],
   "author": "",
@@ -46,6 +47,13 @@
       "target": [
         { "target": "nsis", "arch": ["x64"] }
       ]
+    },
+    "linux": {
+      "icon": "assets/icon.ico",
+      "target": [
+        { "target": "AppImage", "arch": ["x64"] }
+      ],
+      "category": "Utility"
     },
     "asar": false,
     "nsis": {

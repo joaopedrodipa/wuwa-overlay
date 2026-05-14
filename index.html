@@ -10,7 +10,7 @@
     <div class="overlay-container" id="mainScreen">
         <!-- Custom Title Bar for Dragging -->
         <div class="title-bar" id="titleBar">
-            <div class="title">Wuthering Waves Draft Overlay</div>
+            <div class="title">Wuthering Waves DRAFT</div>
             <div class="window-controls">
                 <button class="control-btn minimize" onclick="minimizeWindow()">─</button>
                 <button class="control-btn maximize" onclick="maximizeWindow()">▢</button>
@@ -38,9 +38,11 @@
                 <button class="control-btn close" onclick="closeWindow()">✕</button>
             </div>
         </div>
-        <div class="tower-bar" id="towerBar"></div>
         <div class="draft-body">
-            <div class="draft-pool" id="draftPool"></div>
+            <div class="draft-left">
+                <div class="tower-bar" id="towerBar"></div>
+                <div class="draft-pool" id="draftPool"></div>
+            </div>
             <div class="draft-cascade" id="draftCascade"></div>
         </div>
     </div>

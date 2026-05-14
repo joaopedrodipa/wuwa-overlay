@@ -23,6 +23,7 @@ let characterResonances2 = {};
 const STORAGE_KEY = 'wuwa_overlay_state';
 const BG_KEY = 'wuwa_bg_image';
 const BG_OVERLAY_KEY = 'wuwa_bg_overlay';
+const SAVED_DRAFTS_KEY = 'wuwa_saved_drafts';
 let playerName1 = 'Player 1';
 let playerName2 = 'Player 2';
 
@@ -1197,24 +1198,57 @@ function renderDraftCascade() {
     const header = document.createElement('div');
     header.className = 'cascade-header';
 
+    const row1 = document.createElement('div');
+    row1.className = 'cascade-header-row';
+
     const tradeBtn = document.createElement('button');
     tradeBtn.className = `cascade-trade-btn${decksSwapped ? ' active' : ''}`;
     tradeBtn.textContent = 'Switch';
     tradeBtn.onclick = tradeSelect;
-    header.appendChild(tradeBtn);
+    row1.appendChild(tradeBtn);
 
     const clearBtn = document.createElement('button');
     clearBtn.className = 'cascade-clear-btn';
     clearBtn.textContent = 'Clear';
     clearBtn.onclick = clearAllPicks;
-    header.appendChild(clearBtn);
+    row1.appendChild(clearBtn);
+
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'cascade-save-btn';
+    saveBtn.textContent = 'Save';
+    saveBtn.onclick = saveDraft;
+    row1.appendChild(saveBtn);
+    header.appendChild(row1);
+
+    const row2 = document.createElement('div');
+    row2.className = 'cascade-header-row';
 
     const viewTimesBtn = document.createElement('button');
     viewTimesBtn.className = 'cascade-viewtimes-btn';
     viewTimesBtn.textContent = 'View Times';
     viewTimesBtn.onclick = () => openViewTimes(null);
-    header.appendChild(viewTimesBtn);
+    row2.appendChild(viewTimesBtn);
+
+    const draftsBtn = document.createElement('button');
+    draftsBtn.className = 'cascade-drafts-btn';
+    draftsBtn.textContent = 'Drafts';
+    draftsBtn.onclick = openSavedDrafts;
+    row2.appendChild(draftsBtn);
+    header.appendChild(row2);
+
     cascade.appendChild(header);
+
+    const playerNamesRow = document.createElement('div');
+    playerNamesRow.className = 'cascade-player-names';
+    const p1Label = document.createElement('div');
+    p1Label.className = 'cascade-player-name cascade-player-name-p1';
+    p1Label.textContent = playerName1;
+    const p2Label = document.createElement('div');
+    p2Label.className = 'cascade-player-name cascade-player-name-p2';
+    p2Label.textContent = playerName2;
+    playerNamesRow.appendChild(p1Label);
+    playerNamesRow.appendChild(p2Label);
+    cascade.appendChild(playerNamesRow);
 
     // SLOT_H = full slot height (cs-num ~9px + icon 60px + 3px gap)
     // When switching sides: next pick starts at SLOT_H/2 (half-overlap stagger)
@@ -1303,6 +1337,191 @@ function buildCascadeSlot(idx) {
     return slot;
 }
 
+// ── Saved Drafts ──────────────────────────────────────────────────────────────
+
+function loadSavedDrafts() {
+    try { return JSON.parse(localStorage.getItem(SAVED_DRAFTS_KEY) || '[]'); }
+    catch(e) { return []; }
+}
+
+function saveDraft() {
+    const drafts = loadSavedDrafts();
+    const savedRooms = TOWER_KEYS.filter(k => towerBarStates[k] === 'selected')
+        .map(k => TOWER_BLOCK_TITLES[k]);
+    drafts.push({
+        id: Date.now(),
+        savedAt: Date.now(),
+        player1: playerName1,
+        player2: playerName2,
+        rooms: savedRooms,
+        pickOrder: Array.from({length: 16}, (_, i) => getDraftPlayer(i)),
+        picks: draftPicks.map((pick, i) => pick ? {
+            charId: pick.char.id,
+            charName: pick.char.name,
+            player: pick.player,
+            resonance: pick.resonance,
+            isBan: BAN_INDICES.has(i)
+        } : null)
+    });
+    try { localStorage.setItem(SAVED_DRAFTS_KEY, JSON.stringify(drafts)); }
+    catch(e) {}
+    openSavedDrafts();
+}
+
+function deleteSavedDraft(id) {
+    const drafts = loadSavedDrafts().filter(d => d.id !== id);
+    localStorage.setItem(SAVED_DRAFTS_KEY, JSON.stringify(drafts));
+    openSavedDrafts();
+}
+
+function buildMiniCascadeGrid(draft) {
+    const SLOT_H = 62;
+    const tops = [0];
+    for (let i = 1; i < 16; i++) {
+        const sameSide = draft.pickOrder[i - 1] === draft.pickOrder[i];
+        tops.push(tops[i - 1] + (sameSide ? SLOT_H : Math.round(SLOT_H / 2)));
+    }
+    const grid = document.createElement('div');
+    grid.className = 'sd-cascade-grid';
+    grid.style.height = (tops[15] + SLOT_H) + 'px';
+
+    for (let i = 0; i < 16; i++) {
+        const player = draft.pickOrder[i];
+        const pick = draft.picks[i];
+        const isBan = pick ? pick.isBan : BAN_INDICES.has(i);
+
+        const wrap = document.createElement('div');
+        wrap.className = 'sd-slot-wrap';
+        wrap.style.top  = tops[i] + 'px';
+        wrap.style.left = player === 1 ? '0' : 'calc(50% + 1px)';
+        wrap.style.width = 'calc(50% - 1px)';
+
+        const slot = document.createElement('div');
+        slot.className = `sd-slot cs-p${player}${isBan ? ' cs-ban' : ''}`;
+
+        const num = document.createElement('div');
+        num.className = 'sd-slot-num';
+        num.textContent = i + 1;
+        slot.appendChild(num);
+
+        if (pick) {
+            const char = resonatorsById.get(pick.charId);
+            if (char) slot.appendChild(buildCharImg(char, 'sd-icon'));
+        } else {
+            const empty = document.createElement('div');
+            empty.className = 'cs-empty';
+            empty.textContent = '+';
+            slot.appendChild(empty);
+        }
+        wrap.appendChild(slot);
+        grid.appendChild(wrap);
+    }
+    return grid;
+}
+
+function buildSavedDraftCard(draft) {
+    const card = document.createElement('div');
+    card.className = 'sd-card';
+
+    const cardHeader = document.createElement('div');
+    cardHeader.className = 'sd-card-header';
+
+    const names = document.createElement('div');
+    names.className = 'sd-card-names';
+    const n1 = document.createElement('span');
+    n1.className = 'sd-name-p1';
+    n1.textContent = draft.player1;
+    const sep = document.createElement('span');
+    sep.className = 'sd-name-sep';
+    sep.textContent = ' vs ';
+    const n2 = document.createElement('span');
+    n2.className = 'sd-name-p2';
+    n2.textContent = draft.player2;
+    names.appendChild(n1); names.appendChild(sep); names.appendChild(n2);
+
+    const delBtn = document.createElement('button');
+    delBtn.className = 'sd-del-btn';
+    delBtn.textContent = '✕';
+    delBtn.onclick = () => deleteSavedDraft(draft.id);
+
+    cardHeader.appendChild(names);
+    cardHeader.appendChild(delBtn);
+    card.appendChild(cardHeader);
+
+    if (draft.rooms && draft.rooms.length) {
+        const roomsRow = document.createElement('div');
+        roomsRow.className = 'cascade-rooms-row';
+        const r1 = document.createElement('span');
+        r1.textContent = draft.rooms[0] || '—';
+        const sep = document.createElement('span');
+        sep.className = 'cascade-rooms-sep';
+        sep.textContent = '|';
+        const r2 = document.createElement('span');
+        r2.textContent = draft.rooms[1] || '—';
+        roomsRow.appendChild(r1);
+        roomsRow.appendChild(sep);
+        roomsRow.appendChild(r2);
+        card.appendChild(roomsRow);
+    }
+
+    const colLabels = document.createElement('div');
+    colLabels.className = 'sd-col-labels';
+    const l1 = document.createElement('div');
+    l1.className = 'sd-col-label sd-col-label-p1';
+    l1.textContent = draft.player1;
+    const l2 = document.createElement('div');
+    l2.className = 'sd-col-label sd-col-label-p2';
+    l2.textContent = draft.player2;
+    colLabels.appendChild(l1); colLabels.appendChild(l2);
+    card.appendChild(colLabels);
+
+    const gridWrap = document.createElement('div');
+    gridWrap.className = 'sd-grid-wrap';
+    gridWrap.appendChild(buildMiniCascadeGrid(draft));
+    card.appendChild(gridWrap);
+
+    return card;
+}
+
+function openSavedDrafts() {
+    let modal = document.getElementById('savedDraftsModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'savedDraftsModal';
+        modal.className = 'sd-modal';
+        document.body.appendChild(modal);
+    }
+    modal.innerHTML = '';
+    modal.style.display = 'flex';
+
+    const topBar = document.createElement('div');
+    topBar.className = 'sd-topbar';
+    const title = document.createElement('span');
+    title.className = 'sd-title';
+    title.textContent = 'Saved Drafts';
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'sd-close-btn';
+    closeBtn.textContent = '← Back';
+    closeBtn.onclick = () => { modal.style.display = 'none'; };
+    topBar.appendChild(closeBtn);
+    topBar.appendChild(title);
+    modal.appendChild(topBar);
+
+    const drafts = loadSavedDrafts();
+    const body = document.createElement('div');
+    body.className = 'sd-body';
+
+    if (!drafts.length) {
+        const empty = document.createElement('div');
+        empty.className = 'sd-empty';
+        empty.textContent = 'No saved drafts yet.';
+        body.appendChild(empty);
+    } else {
+        drafts.slice().reverse().forEach(d => body.appendChild(buildSavedDraftCard(d)));
+    }
+    modal.appendChild(body);
+}
+
 function toggleSelection(charId, card, selectedCharacters, playerClass) {
     if (selectedCharacters.has(charId)) {
         selectedCharacters.delete(charId);
@@ -1331,8 +1550,14 @@ function normalizeName(str) {
     return str.toLowerCase().replace(/[\s\-_()']/g, '').replace(/\(|\)/g, '');
 }
 
+const NAME_ALIASES = {
+    'theshorekeeper': 'shorekeeper',
+    'luuk':           'luukherssen',
+};
+
 function findCharacterByName(inputName) {
-    const normalized = normalizeName(inputName);
+    let normalized = normalizeName(inputName);
+    normalized = NAME_ALIASES[normalized] ?? normalized;
     return resonators.find(char =>
         normalizeName(char.name) === normalized ||
         normalizeName(char.id) === normalized
@@ -1971,6 +2196,11 @@ function renderTowerScreen() {
     };
     bgBlock.appendChild(clearBgBtn);
 
+    const bgHint = document.createElement('div');
+    bgHint.className = 'tower-bg-hint';
+    bgHint.textContent = 'Recommended: Darken by 15% or 10%';
+    bgBlock.appendChild(bgHint);
+
     body.appendChild(bgBlock);
     screen.appendChild(body);
 
@@ -2124,7 +2354,7 @@ function buildMtCharSearchSlot(key, slotIdx) {
                     item.addEventListener('mousedown', e => {
                         e.preventDefault();
                         slotData.charId = char.id;
-                        if (char.rarity === 4 && slotData.weapon === 'yellow') slotData.weapon = 'purple';
+                        if (char.rarity === 4) slotData.weapon = 'purple';
                         saveMyTimesPersist();
                         refresh();
                     });
@@ -2166,10 +2396,16 @@ function buildMyTimesBlock(key) {
     lbl.textContent = TOWER_BLOCK_TITLES[key];
     block.appendChild(lbl);
 
-    // Row 1: [Char1][Char2][Char3][Time]
+    // Row: [Unit1(Char+Weapon)][Unit2(Char+Weapon)][Unit3(Char+Weapon)][Time]
     const charsRow = document.createElement('div');
     charsRow.className = 'mt-chars-row';
-    for (let i = 0; i < 3; i++) charsRow.appendChild(buildMtCharSearchSlot(key, i));
+    for (let i = 0; i < 3; i++) {
+        const unit = document.createElement('div');
+        unit.className = 'mt-slot-unit';
+        unit.appendChild(buildMtCharSearchSlot(key, i));
+        unit.appendChild(buildMtWeaponBtn(key, i));
+        charsRow.appendChild(unit);
+    }
 
     const timeInp = document.createElement('input');
     timeInp.type = 'text';
@@ -2187,12 +2423,6 @@ function buildMyTimesBlock(key) {
     });
     charsRow.appendChild(timeInp);
     block.appendChild(charsRow);
-
-    // Row 2: [Weapon1][Weapon2][Weapon3]
-    const weaponsRow = document.createElement('div');
-    weaponsRow.className = 'mt-weapons-row';
-    for (let i = 0; i < 3; i++) weaponsRow.appendChild(buildMtWeaponBtn(key, i));
-    block.appendChild(weaponsRow);
 
     // Save button for this room
     const saveRoomBtn = document.createElement('button');
