@@ -402,6 +402,35 @@ body {
     box-shadow: 0 0 10px rgba(160,32,240,0.2);
 }
 
+.deck-btn-row {
+    display: flex;
+    gap: 4px;
+    width: 100%;
+}
+.deck-btn-row .deck-import-btn,
+.deck-btn-row .deck-export-btn {
+    width: 50%;
+}
+
+.deck-export-btn {
+    padding: 4px 8px;
+    background: rgba(32,180,140,0.14);
+    border: 1px solid rgba(32,180,140,0.3);
+    border-radius: 6px;
+    color: rgba(255,255,255,0.85);
+    font-size: clamp(8px, 1.3vw, 11px);
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    -webkit-app-region: no-drag;
+}
+.deck-export-btn:hover {
+    background: rgba(32,180,140,0.3);
+    border-color: rgba(32,180,140,0.55);
+    box-shadow: 0 0 10px rgba(32,180,140,0.2);
+}
+
 .deck-name-input,
 .player-name-input {
     width: 100%;

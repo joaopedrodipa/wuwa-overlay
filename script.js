@@ -180,7 +180,10 @@ function createDeckFooter() {
     p1Section.className = 'deck-save-section';
     p1Section.innerHTML = `
         <textarea class="deck-import-input" id="deckImport1" placeholder="Paste deck: CharS0,CharS6,..."></textarea>
-        <button class="deck-import-btn" onclick="importDeck(1)">Import P1</button>
+        <div class="deck-btn-row">
+            <button class="deck-import-btn" onclick="importDeck(1)">Import P1</button>
+            <button class="deck-export-btn" onclick="exportDeck(1)">Export P1</button>
+        </div>
         <input type="text" class="player-name-input" id="playerNameInput1" placeholder="Player 1 name" value="${playerName1}" />
     `;
     p1Section.querySelector('#playerNameInput1').oninput = (e) => {
@@ -201,7 +204,10 @@ function createDeckFooter() {
     p2Section.className = 'deck-save-section';
     p2Section.innerHTML = `
         <textarea class="deck-import-input" id="deckImport2" placeholder="Paste deck: CharS0,CharS6,..."></textarea>
-        <button class="deck-import-btn" onclick="importDeck(2)">Import P2</button>
+        <div class="deck-btn-row">
+            <button class="deck-import-btn" onclick="importDeck(2)">Import P2</button>
+            <button class="deck-export-btn" onclick="exportDeck(2)">Export P2</button>
+        </div>
         <input type="text" class="player-name-input" id="playerNameInput2" placeholder="Player 2 name" value="${playerName2}" />
     `;
     p2Section.querySelector('#playerNameInput2').oninput = (e) => {
@@ -1597,6 +1603,26 @@ function importDeck(player) {
     }
 }
 
+function exportDeck(player) {
+    const selectedChars = player === 1 ? selectedCharacters1 : selectedCharacters2;
+    const resonances = player === 1 ? characterResonances1 : characterResonances2;
+
+    const entries = [];
+    selectedChars.forEach(id => {
+        const char = resonatorsById.get(id);
+        if (char) {
+            const constellation = resonances[id] ?? 0;
+            entries.push(`${char.name}S${constellation}`);
+        }
+    });
+
+    const textarea = document.getElementById(`deckImport${player}`);
+    if (textarea) {
+        textarea.value = entries.join(',');
+        textarea.select();
+    }
+}
+
 async function saveDeck(player) {
     const input = document.getElementById(`deckName${player}`);
     const deckName = input ? input.value.trim() : '';
@@ -2691,6 +2717,7 @@ window.clearPlayer = clearPlayer;
 window.clearAllPicks = clearAllPicks;
 window.tradeSelect = tradeSelect;
 window.importDeck = importDeck;
+window.exportDeck = exportDeck;
 window.saveDeck = saveDeck;
 window.startDraft = startDraft;
 window.exitDraft = exitDraft;
